@@ -1,25 +1,26 @@
 // FETCH DATA AND GENERATE DATE TO THE PROJECT DETAILS PAGE
-const path = require('path')
+const path = require(`path`)
 
 exports.createPages = async ({ graphql, actions }) => {
-    // GET ALL MARKDOWN FILES
+
     const { data } = await graphql(`
-        query Projects {
-            allMarkdownRemark {
-                nodes {
-                    frontmatter {
-                    slug
-                    }
-                }
-            }
-        }      
-    `)
+    query Articles {
+      allMarkdownRemark {
+        nodes {
+          frontmatter {
+            slug
+          }
+        }
+      }
+    }
+  `)
 
     data.allMarkdownRemark.nodes.forEach(node => {
-        actions.createPages({
+        actions.createPage({
             path: '/projects/' + node.frontmatter.slug,
             component: path.resolve('./src/templates/project-details.js'),
-            context: { slug: node.frontmatter.slug }
+            context: { slug: node.frontmatter.slug } + 'md'
         })
     })
+
 }
