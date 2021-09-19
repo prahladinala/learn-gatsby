@@ -8,6 +8,7 @@ module.exports = {
   /* Your site config here */
   plugins: [
     // REGISTER OUR PLUGINS
+    `gatsby-plugin-image`,
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
